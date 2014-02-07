@@ -1,12 +1,12 @@
 {
-    "name": "nodeCausality",
+    "name": "causaltrack",
     "version": "0.1.0",
     "author": "Chat-Wane <grumpy.chat.wane@gmail.com>",
     "description": "vectors for causality tracking, whether characterizing or semantic causalities",
     "main": "index.js",
     "repository": {
 	"type": "git",
-	"url": "https://github.com/chat-wane/nodeCausality.git"
+	"url": "https://github.com/chat-wane/CausalTrack.git"
     },
     "keywords": [
 	"causality",
