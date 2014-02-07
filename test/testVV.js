@@ -1,6 +1,6 @@
 var expect = require('expect.js');
 var Mocha = require('mocha');
-var assert = require('assert');
+
 
 var VV = require('../lib/versionvector.js');
 
@@ -45,9 +45,9 @@ describe('versionvector.js', function() {
 	    var vv = new VV(13,37);
 	    var vv2 = new VV(0,37);
 	    vv2.increment();
-	    expect(vv2.isRdy(vv)).to.be.ok();
+	    expect(vv.isRdy(vv2)).to.be.ok();
 	    vv2.increment();
-	    expect(vv2.isRdy(vv)).to.not.be.ok();
+	    expect(vv.isRdy(vv2)).to.not.be.ok();
 	});
     });
 });
