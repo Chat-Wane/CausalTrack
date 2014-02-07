@@ -10,7 +10,7 @@ non-blocking to each other.
 
 ## Installation
 
-   $ npm install causaltrack
+	npm install causaltrack
 
 ## Usage
 
