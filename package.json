@@ -1,6 +1,6 @@
 {
     "name": "causaltrack",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": "Chat-Wane <grumpy.chat.wane@gmail.com>",
     "description": "vectors for causality tracking, whether characterizing or semantic causalities",
     "main": "index.js",
