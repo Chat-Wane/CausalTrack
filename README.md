@@ -36,4 +36,9 @@ ivversion.incrementFrom(ec); // couple {_e: entry, _c: counter } of the sender
 vversion.isRdy(rvv); // rvv of type VV
 ivversion.isRdy(ec); // targeted semantically dependant event.
 		     // couple {_e: entry, _c: counter} of dependant event
+
+//#5 verify if the data are already included in the vector
+vversion.isLower(rvv); // rvv of type VV
+ivversion.isLower(ec); // unique identifier of the remote event
+		       // couple {_e: entry, _c: counter} of dependant event
 ```
