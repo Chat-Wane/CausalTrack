@@ -81,6 +81,44 @@ describe('intervalversionvector.js', function() {
 	});
 	
 	it('check if an operation independant of any other is rdy',function(){
+	    var ivv = new IVV(13,37);
+	    var c = null;
+	    expect(ivv.isRdy(c)).to.be.ok();
+	});
+
+	it('check in the omen vector for target operation', function(){
+	    var ivv = new IVV(13,37);
+	    var ivv2 = new IVV(0,37);
+	    ivv2.increment();
+	    ivv2.increment();
+	    var c = {_e: ivv2._e, _c: ivv2._v[ivv2._e]};
+	    ivv.incrementFrom(c);
+	    // another operation arrive depending on operation identifier by c;
+	    expect(ivv.isRdy(c)).to.be.ok();
 	});
     });
+    
+    describe('isLower', function(){
+	it('check if the ev has been seen before or not', function(){
+            var ivv = new IVV(13,37);
+            var ivv2 = new IVV(0,37);
+	    ivv2.increment();
+	    var c = {_e : ivv2._e , _c:ivv2._v[ivv2._e]};
+            expect(ivv.isLower(c)).to.not.be.ok();
+            ivv.incrementFrom(c);
+            expect(ivv.isLower(c)).to.be.ok();
+        });
+
+	it('check in the omen if the ev has been seen', function(){
+            var ivv = new IVV(13,37);
+            var ivv2 = new IVV(0,37);
+	    ivv2.increment();
+	    ivv2.increment();
+	    var c = {_e : ivv2._e , _c:ivv2._v[ivv2._e]};
+            expect(ivv.isLower(c)).to.not.be.ok();
+            ivv.incrementFrom(c);
+            expect(ivv.isLower(c)).to.be.ok();
+	});
+    });
+    
 });

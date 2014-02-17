@@ -50,4 +50,15 @@ describe('versionvector.js', function() {
 	    expect(vv.isRdy(vv2)).to.not.be.ok();
 	});
     });
+
+    describe('isLower', function(){
+	it('check if the vv has been seen before or not', function(){
+	    var vv = new VV(13,37);
+	    var vv2 = new VV(0,37);
+	    vv2.increment();
+	    expect(vv.isLower(vv2)).to.not.be.ok();
+	    vv.incrementFrom(vv2);
+	    expect(vv.isLower(vv2)).to.be.ok();
+	});
+    });
 });
