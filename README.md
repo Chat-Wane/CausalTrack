@@ -20,9 +20,9 @@ $ npm install causaltrack
 var VV = require('causaltrack').VV;   // version vector
 var IVV = require('causaltrack').IVV; // interval version vector
 
-//#1 init a version vector of size 37 with the local entry 13
-var vversion = new VV(13,37);
-var ivversion = new IVV(13,37);
+//#1 init a version vector with the local entry 13
+var vversion = new VV(13);
+var ivversion = new IVV(13);
 
 //#2 update the local entry of the local vector
 vversion.increment();
