@@ -9,7 +9,7 @@ describe('intervalversionvector.js', function() {
 	it('init the entries to zero', function(){
 	    var ivv = new IVV(13);
 	    expect(ivv._v[ivv._e]).to.be.eql(0);
-	    expect(ivv._v[ivv._e]).to.be.eql(0);
+	    expect(ivv._o[ivv._e]).to.be.eql(0);
 	});
     });
     
