@@ -2,6 +2,7 @@ var expect = require('expect.js');
 var Mocha = require('mocha');
 
 var IVV = require('../lib/intervalversionvector.js');
+var BI = require("BigInt");
 
 describe('intervalversionvector.js', function() {
 
@@ -9,7 +10,7 @@ describe('intervalversionvector.js', function() {
 	it('init the entries to zero', function(){
 	    var ivv = new IVV(13);
 	    expect(ivv._v[ivv._e]).to.be.eql(0);
-	    expect(ivv._o[ivv._e]).to.be.eql(0);
+	    expect(BI.isZero(ivv._o[ivv._e])).to.be.ok();
 	});
     });
     
@@ -24,7 +25,7 @@ describe('intervalversionvector.js', function() {
 	    var ivv = new IVV(13);
 	    ivv.increment();
 	    ivv.increment();
-	    expect(ivv._o[ivv._e]).to.be.eql(0);
+	    expect(BI.isZero(ivv._o[ivv._e])).to.be.ok();
 	});
     });
 
@@ -53,7 +54,20 @@ describe('intervalversionvector.js', function() {
 	    rIVV.increment();
 	    expect(rIVV._v[rIVV._e]).to.be.eql(2);
 	    ivv.incrementFrom({_e: rIVV._e, _c:rIVV._v[rIVV._e] });
-	    expect(ivv._o[rIVV._e]).to.be.eql(2); // 00010 <-
+	    expect(BI.modInt(ivv._o[rIVV._e],1337)).to.be.eql(2); // 00010 <-
+	});
+
+	it('a lot of messages are lost, omen must handle it',function(){
+	    var ivv = new IVV(13);
+	    var rIVV = new IVV(4);
+	    for (var i = 0; i< 1000; ++i){
+		rIVV.increment();
+	    }
+	    expect(rIVV._v[rIVV._e]).to.be.eql(1000);
+	    ivv.incrementFrom({_e: rIVV._e, _c:rIVV._v[rIVV._e] });
+	    var duplicate = BI.dup(ivv._o[rIVV._e]);
+	    BI.rightShift_(duplicate,999);
+	    expect(BI.modInt(duplicate,1337)).to.be.eql(1); // 00010 <-
 	});
     });
     
