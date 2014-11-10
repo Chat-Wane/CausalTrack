@@ -18,8 +18,8 @@ describe('versionvector.js', function() {
 	it('increment the entry from another vv', function(){
 	    var vv = new VV(13);
 	    var remoteVV = new VV(4);
-	    remoteVV.increment();
-	    vv.incrementFrom(remoteVV);
+	    var ec = remoteVV.increment();
+	    vv.incrementFrom(ec);
 	    expect(remoteVV._v[remoteVV._e]).to.be.eql(1);
 	    expect(vv._v[remoteVV._e]).to.be.eql(remoteVV._v[remoteVV._e]);
 	});
@@ -40,10 +40,10 @@ describe('versionvector.js', function() {
 	it('check if the vv has been seen before or not', function(){
 	    var vv = new VV(13);
 	    var vv2 = new VV(0);
-	    vv2.increment();
-	    expect(vv.isLower(vv2)).to.not.be.ok();
-	    vv.incrementFrom(vv2);
-	    expect(vv.isLower(vv2)).to.be.ok();
+	    var ec = vv2.increment();
+	    expect(vv.isLower(ec)).to.not.be.ok();
+	    vv.incrementFrom(ec);
+	    expect(vv.isLower(ec)).to.be.ok();
 	});
     });
 });
