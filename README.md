@@ -33,34 +33,33 @@ var VV = require('causaltrack').VV;   // version vector
 var IVV = require('causaltrack').IVV; // interval version vector
 var VVwE = require('causaltrack').VVwE; // version vector with exceptions
 
-//#1 init a version vector with the local entry 42
-var vversion = new VV(42);
-var ivversion = new IVV(42);
+// #1 Initialize the causality tracking structure with the unique site
+// identifier 42
+var vv = new VV(42);
+var ivv = new IVV(42);
 var vvwe = new VVwE(42);
 
-//#2 update the local entry of the local vector
-vversion.increment();
-ivversion.increment();
-vvwe.increment();
+// #2 Update the local entry of the local vector. Return a pair
+// {_e:entry, _c:counter} of the sender which uniquely identifies the operation
+var ecVV = vv.increment();
+var ecIVV = ivv.increment();
+var ecVVwE = vvwe.increment();
 
-//#3 increment with data received from other sites supposedly ready
-vversion.incrementFrom(rvv); // rvv of type VV
-ivversion.incrementFrom(ec); // couple {_e: entry, _c: counter } of the sender
-vvweversion.incrementFrom(ec);// couple {_e: entry, _c: counter } of the sender
+// #3 Check if the operation has already been integrated
+vv.isLower(ecVV);
+ivv.isLower(ecIVV);
+vvwe.isLower(ecVVwE);
 
-//#4 verify if the data are ready regards to the local vector
-vversion.isRdy(rvv); // rvv of type VV
-ivversion.isRdy(ec); // targeted semantically dependant event.
-		     // couple {_e: entry, _c: counter} of dependant event
-vvwe.isRdy(ec); // targeted semantically dependant event.
-		// couple {_e: entry, _c: counter} of dependant event
+// #4 Check if the operation is ready to be integrated
+vv.isRdy(rvv); // rvv instance of VV
+ivv.isRdy(ecIVV); // ecIVV the entry clock specifying a dependency to an op
+vvwe.isRdy(ecVVwE); // ecVVwE the entry clock specifying a dependency to an op
 
-//#5 verify if the data are already included in the vector
-vversion.isLower(rvv); // rvv of type VV
-ivversion.isLower(ec); // unique identifier of the remote event
-		       // couple {_e: entry, _c: counter} of dependant event
-vvwe.isLower(ec); // unique identifier of the remote event
-		       // couple {_e: entry, _c: counter} of dependant event
+// #5 Increment the local vector with the entry clock of the received
+// operation supposedly ready
+vv.incrementFrom(ecVV);
+ivv.incrementFrom(ecIVV);
+vvwe.incrementFrom(ecVVwE);
 ```
 
 ## References
