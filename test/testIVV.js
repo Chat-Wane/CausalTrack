@@ -1,10 +1,10 @@
 var expect = require('expect.js');
 var Mocha = require('mocha');
 
-var IVV = require('../lib/intervalversionvector.js');
+var IVV = require('../lib/ivv.js');
 var BI = require("BigInt");
 
-describe('intervalversionvector.js', function() {
+describe('ivv.js', function() {
 
     describe('ivv', function(){
 	it('init the entries to zero', function(){

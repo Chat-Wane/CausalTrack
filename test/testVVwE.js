@@ -1,9 +1,9 @@
 var expect = require('expect.js');
 var Mocha = require('mocha');
 
-var VVwE = require('../lib/versionvectorwithexcept.js');
+var VVwE = require('../lib/vvwe.js');
 
-describe('versionvectorwithexcept.js', function() {
+describe('vvwe.js', function() {
 
     describe('vvwe', function(){
 	it('init the entries to zero', function(){

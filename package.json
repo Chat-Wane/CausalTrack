@@ -1,6 +1,6 @@
 {
     "name": "causaltrack",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "author": "Chat-Wane <grumpy.chat.wane@gmail.com>",
     "description": "vectors for causality tracking, whether characterizing or semantic causalities",
     "main": "index.js",
@@ -15,14 +15,19 @@
 	"non-blocking"
     ],
     "dependencies": {
+	"lru-cache": "2.5.x", 
 	"BigInt": "5.4.x"
     },
+    "bundledDependencies": [
+	"lru-cache",
+	"BigInt"
+    ],
     "devDependencies": {
 	"expect.js":  "0.2.x",
 	"mocha":  "1.17.x"
     },
     "license": "MIT",
     "engines": {
-	"node": ">=0.10.26"
+	"node": ">=0.10.33"
     }
 }

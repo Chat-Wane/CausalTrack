@@ -2,9 +2,9 @@ var expect = require('expect.js');
 var Mocha = require('mocha');
 
 
-var VV = require('../lib/versionvector.js');
+var VV = require('../lib/vv.js');
 
-describe('versionvector.js', function() {
+describe('vv.js', function() {
 
     describe('increment', function(){
 	it('increment the entry', function(){
