@@ -49,7 +49,7 @@ describe('pvvwe.js', function() {
 	    pvvwe.incrementFrom({_e: rpvvwe.local.e, _c:rpvvwe.local.v });
 	    expect(pvvwe.vector.get(rpvvwe.local.e).x).to.have.length(1);
 	    expect(pvvwe.vector.get(rpvvwe.local.e).x.has(1)).to.be.ok();
-	});
+	});	
     });
     
     describe('isReady', function(){
@@ -77,6 +77,20 @@ describe('pvvwe.js', function() {
 	    // another operation arrive depending on operation identifier by c;
 	    expect(pvvwe.isRdy(c)).to.be.ok();
 	});
+	
+	it('a message is lost, we prefer to think it has been delivered',
+	   function(){
+	       var pvvwe = new PVVwE(13, {maxAge:1000}); // 1s and stale
+	       var rpvvwe = new PVVwE(42, {maxAge:1000}); // 1s and stale
+	       var lost = rpvvwe.increment();
+	       var target = rpvvwe.increment();
+	       expect(rpvvwe.local.v).to.be.eql(2);
+	       pvvwe.incrementFrom(target);
+	       expect(pvvwe.isRdy(lost)).to.not.be.ok();
+	       setTimeout(function(){
+		   expect(pvvwe.isRdy(lost)).to.be.ok();
+	       }, 1500);
+	   });	
     });
     
     describe('isLower', function(){
