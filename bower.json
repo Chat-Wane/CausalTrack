@@ -1,0 +1,10 @@
+{
+    "name": "causaltrack",
+    "version": "0.4.1",
+    "main": "causaltrack.bundle.js",
+    "ignore": {
+	"**/*.js",
+	"package.json",
+	"index.js"
+    }
+}
