@@ -5,6 +5,8 @@
     "ignore": [
 	"**/*.js",
 	"package.json",
-	"index.js"
+	"index.js",
+	"test",
+	"lib"
     ]
 }
